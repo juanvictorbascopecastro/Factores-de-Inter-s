@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">IND210 (Factores de Interés)</string>
+    <string name="calculate">Calcular</string>
+    <string name="clear">Limpiar</string>
+</resources>
