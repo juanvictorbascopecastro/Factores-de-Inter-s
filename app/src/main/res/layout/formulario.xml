@@ -92,6 +92,7 @@
         android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="Factores de Interes"
         android:scaleType="fitStart"
         android:src="@drawable/ind210" />
     <TextView
@@ -105,4 +106,31 @@
         android:text="Desarrollado por J. Victor Bascope Castro"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+    <!-- Repositorio -->
+    <LinearLayout
+        android:id="@+id/githubContainer"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/github"
+            android:contentDescription="GitHub Icon"
+            android:layout_marginEnd="8dp" />
+
+        <TextView
+            android:id="@+id/txtRepositorio"
+            android:text="https://github.com/juanvictorbascopecastro/Factores-de-Inter-s"
+            android:textSize="14sp"
+            android:textColor="#0000EE"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
 </LinearLayout>
