@@ -12,7 +12,7 @@
         android:gravity="center"
         android:layout_margin="20dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -22,7 +22,7 @@
                 style="@style/MyEditTextStyle"
                 android:layout_width="fill_parent"
                 android:layout_height="45dp"
-                android:layout_marginRight="2dp"
+                android:layout_marginEnd="2dp"
                 android:layout_weight="1"
                 android:hint="(i) Interes..."
                 android:inputType="number|numberDecimal" />
@@ -32,7 +32,7 @@
                 style="@style/MyEditTextStyle"
                 android:layout_width="fill_parent"
                 android:layout_height="45dp"
-                android:layout_marginLeft="2dp"
+                android:layout_marginStart="2dp"
                 android:layout_weight="1"
                 android:hint="(n) Tiempo, periodo..."
                 android:inputType="number|numberDecimal"/>
@@ -65,20 +65,26 @@
             android:inputType="number|numberDecimal" />
 
         <LinearLayout
+            style="?android:attr/buttonBarStyle"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <Button
                 android:id="@+id/btnClear"
                 android:layout_marginTop="3dp"
                 android:text="@string/clear"
+                android:background="#eeeeee"
                 android:layout_width="fill_parent"
                 android:layout_weight="1"
-                android:layout_marginRight="1dp"
-                android:layout_height="wrap_content"/>
+                android:layout_marginEnd="1dp"
+                android:layout_height="wrap_content" />
+
             <Button
                 android:id="@+id/btnCalculate"
-                android:layout_marginLeft="1dp"
+                android:background="@color/purple_200"
+                android:textColor="@android:color/white"
+                android:layout_marginStart="1dp"
                 android:layout_marginTop="3dp"
                 android:text="@string/calculate"
                 android:layout_weight="1"
@@ -86,14 +92,15 @@
                 android:layout_height="wrap_content"/>
         </LinearLayout>
 
-
-        <io.github.kexanie.library.MathView
+        <ru.noties.jlatexmath.JLatexMathView
             android:id="@+id/formula_one"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            auto:text=""
-            android:layout_gravity="left"
-            auto:engine="MathJax">
-        </io.github.kexanie.library.MathView>
+            android:layout_height="match_parent"
+            android:padding="16dip"
+            android:background="@color/white"
+            app:jlmv_alignVertical="center"
+            app:jlmv_alignHorizontal="center"
+            app:jlmv_textSize="16sp" />
+
     </LinearLayout>
 </ScrollView>

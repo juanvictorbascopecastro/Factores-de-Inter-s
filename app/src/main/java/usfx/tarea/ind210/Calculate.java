@@ -7,8 +7,10 @@ public class Calculate {
     }
     // Retorna P
     public static  double FVPPU(double i, double n, double F){
-        return F*(1/Math.pow((1+i), n));
+        // return F*(1/Math.pow((1+i), n));
+        return F / Math.pow((1+i), n);
     }
+
     //Retorna P
     public static  double FVPSU (double i, double n, double A){
         return A*((Math.pow((1+i), n) - 1)/(i*Math.pow((1+i), n)));
@@ -23,6 +25,7 @@ public class Calculate {
     }
     //Retorna F
     public static  double FCCSU(double i, double n, double A){
-        return A*((Math.pow((1+i), n)-1)/i);
+        if (i == 0) return A * n;
+        return A * ((Math.pow((1+i), n) - 1) / i);
     }
 }

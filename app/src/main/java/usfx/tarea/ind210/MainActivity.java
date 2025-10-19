@@ -3,8 +3,7 @@ package usfx.tarea.ind210;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
-import android.graphics.Color;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,10 +12,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import io.github.kexanie.library.MathView;
+import ru.noties.jlatexmath.JLatexMathView;
+
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -28,9 +27,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     i: tasa efectiva de interés por periodo (vencido)
     */
     private Button btnCalculate, btnClear;
-    MathView formula_one;
+    JLatexMathView mathView;
     private EditText editA, editP, editF, editI, editN;
 
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,24 +41,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editN = findViewById(R.id.editN);
         editI = findViewById(R.id.editI);
         btnClear = findViewById(R.id.btnClear);
-        formula_one = findViewById(R.id.formula_one);
+        mathView = findViewById(R.id.formula_one);
         btnCalculate = findViewById(R.id.btnCalculate);
         btnCalculate.setOnClickListener(this);
         btnClear.setOnClickListener(this);
-        /*formula_one1.config(
-                "MathJax.Hub.Config({\n"+
-                        "  CommonHTML: { linebreaks: { automatic: true } },\n"+
-                        "  \"HTML-CSS\": { linebreaks: { automatic: true } },\n"+
-                        "         SVG: { linebreaks: { automatic: true } }\n"+
-                        "});");*/
+
+        // La condicion es que no permite ingresar ciertos prametros entre A, F, P es decir solo uno puede ingresar y dos son calculados
+        // evendo cuando cambia el texto
         editA.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {
                 if (!s.toString().trim().equals("")) {
-                    editF.setEnabled(false);
+                    editF.setEnabled(false); // inabilitar F
                     editF.setTextAppearance(MainActivity.this, R.style.MyEditTextStyleEnabled);
                     editF.getText().clear();
                     editP.getText().clear();
-                    editP.setEnabled(false);
+                    editP.setEnabled(false); // Inabilitar P
                     editP.setTextAppearance(MainActivity.this, R.style.MyEditTextStyleEnabled);
                 } else {
                     editF.setEnabled(true);
@@ -124,73 +121,79 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.btnCalculate: {
-                validarDatos();
-                break;
-            }
-            case R.id.btnClear: {
-                editF.getText().clear();
-                editP.getText().clear();
-                editA.getText().clear();
-                editN.getText().clear();
-                editI.getText().clear();
-                break;
-            }
+        int id = view.getId();
+        if (id == R.id.btnCalculate) {
+            validators();
+        } else if (id == R.id.btnClear) {
+            editF.getText().clear();
+            editP.getText().clear();
+            editA.getText().clear();
+            editN.getText().clear();
+            editI.getText().clear();
         }
     }
 
-    private void validarDatos() {
-        if (editI.getText().toString().trim().equals("")) {
-            Toast.makeText(MainActivity.this, "Interes es requerido", Toast.LENGTH_LONG).show();
+    private void validators() {
+        if (editI.getText().toString().trim().isEmpty()) {
+            Toast.makeText(MainActivity.this, "(i) Interes es requerido!", Toast.LENGTH_LONG).show();
             return;
         }
-        if (editN.getText().toString().trim().equals("")) {
-            Toast.makeText(MainActivity.this, "N de (Tiempo o Periodo) es requerido", Toast.LENGTH_LONG).show();
+        if (editN.getText().toString().trim().isEmpty()) {
+            Toast.makeText(MainActivity.this, "N de (Tiempo o Periodo) es requerido!", Toast.LENGTH_LONG).show();
             return;
         }
-        if (editA.getText().toString().trim().equals("") && editF.getText().toString().trim().equals("") && editP.getText().toString().trim().equals("")) {
+        if (editA.getText().toString().trim().isEmpty() && editF.getText().toString().trim().isEmpty() && editP.getText().toString().trim().equals("")) {
             Toast.makeText(MainActivity.this, "Ingrese alguno de los parametros entre A, F o P", Toast.LENGTH_LONG).show();
             return;
         }
-        if (!editA.getText().toString().trim().equals("")) {
+        if (!editA.getText().toString().trim().isEmpty()) {
             CalcularConA();
             return;
         }
-        if (!editP.getText().toString().trim().equals("")) {
+        if (!editP.getText().toString().trim().isEmpty()) {
             CalcularConP();
             return;
         }
-        if (!editF.getText().toString().trim().equals("")) {
+        if (!editF.getText().toString().trim().isEmpty()) {
             CalcularConF();
             return;
         }
     }
 
     private void CalcularConA() {
-        //FVPSU Para calcular P
-        String P = Formulario.FVPSU(editI.getText().toString(), editN.getText().toString(), editA.getText().toString());
-        //FCCSU Para calcular F
-        String F = Formulario.FCCSU(editI.getText().toString(), editN.getText().toString(), editA.getText().toString());
-        formula_one.setText(P + F);
+        // FVPSU Para calcular P
+        String P = FormulariesDisplay.FVPSU(editI.getText().toString(), editN.getText().toString(), editA.getText().toString());
+        // FCCSU Para calcular F
+        String F = FormulariesDisplay.FCCSU(editI.getText().toString(), editN.getText().toString(), editA.getText().toString());
+
+        // Espaciado entre la visualizacion de ambas formulas
+        mostrarFormula(P + " \\\\ \\vspace{0.5cm} \\\\ " + F);
     }
 
-    //Subir su realizacion de la tarea
     private void CalcularConF() {
-        //FVPPU Para calcular P
-        String P = Formulario.FVPPU(editI.getText().toString(), editN.getText().toString(), editF.getText().toString());
-        //FFA Para calcular A
-        String A = Formulario.FFA(editI.getText().toString(), editN.getText().toString(), editF.getText().toString());
-        formula_one.setText(P + A);
+        // FVPPU Para calcular P
+        String P = FormulariesDisplay.FVPPU(editI.getText().toString(), editN.getText().toString(), editF.getText().toString());
+        // FFA Para calcular A
+        String A = FormulariesDisplay.FFA(editI.getText().toString(), editN.getText().toString(), editF.getText().toString());
+
+        // Espaciado entre la visualizacion de ambas formulas
+        mostrarFormula(P + " \\\\ \\vspace{0.5cm} \\\\ " + A);
     }
 
     private void CalcularConP() {
-        //FCCPU Para calcular F
-        String F = Formulario.FCCPU(editI.getText().toString(), editN.getText().toString(), editP.getText().toString());
-        //FFA Para calcular A
-        String A = Formulario.FRC(editI.getText().toString(), editN.getText().toString(), editP.getText().toString());
-        formula_one.setText(F + A);
+        // FCCPU Para calcular F
+        String F = FormulariesDisplay.FCCPU(editI.getText().toString(), editN.getText().toString(), editP.getText().toString());
+        // FRC Para calcular A
+        String A = FormulariesDisplay.FRC(editI.getText().toString(), editN.getText().toString(), editP.getText().toString());
+
+        // Espaciado entre la visualizacion de ambas formulas
+        mostrarFormula(F + " \\\\ \\vspace{0.5cm} \\\\ " + A);
     }
+    private void mostrarFormula(String latex) {
+        mathView.setLatex(latex);
+    }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -200,10 +203,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.action_info :
-                new dialogFormulario(MainActivity.this);
-                break;
+        int id = item.getItemId();
+        if (id == R.id.action_info) {
+            new dialogFormulario(MainActivity.this);
         }
         return super.onOptionsItemSelected(item);
     }
