@@ -1,106 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    xmlns:auto="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".MainActivity">
-    <LinearLayout
-        android:orientation="vertical"
-        android:gravity="center"
-        android:layout_margin="20dp"
+
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
         <LinearLayout
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_margin="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
+                <EditText
+                    android:id="@+id/editI"
+                    style="@style/MyEditTextStyle"
+                    android:layout_width="fill_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginEnd="2dp"
+                    android:layout_weight="1"
+                    android:hint="(i) Interes..."
+                    android:inputType="number|numberDecimal" />
+
+                <EditText
+                    android:id="@+id/editN"
+                    style="@style/MyEditTextStyle"
+                    android:layout_width="fill_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="2dp"
+                    android:layout_weight="1"
+                    android:hint="(n) Tiempo, periodo..."
+                    android:inputType="number|numberDecimal"/>
+            </LinearLayout>
             <EditText
-                android:id="@+id/editI"
+                android:id="@+id/editA"
                 style="@style/MyEditTextStyle"
-                android:layout_width="fill_parent"
+                android:layout_marginTop="3dp"
+                android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:layout_marginEnd="2dp"
-                android:layout_weight="1"
-                android:hint="(i) Interes..."
+                android:hint="(A) Flujos Uniforme..."
                 android:inputType="number|numberDecimal" />
 
             <EditText
-                android:id="@+id/editN"
+                android:id="@+id/editF"
                 style="@style/MyEditTextStyle"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:layout_marginStart="2dp"
-                android:layout_weight="1"
-                android:hint="(n) Tiempo, periodo..."
-                android:inputType="number|numberDecimal"/>
-        </LinearLayout>
-        <EditText
-            android:id="@+id/editA"
-            style="@style/MyEditTextStyle"
-            android:layout_marginTop="3dp"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:hint="(A) Flujos Uniforme..."
-            android:inputType="number|numberDecimal" />
-
-        <EditText
-            android:id="@+id/editF"
-            style="@style/MyEditTextStyle"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginTop="3dp"
-            android:hint="(F) Valor Futuro..."
-            android:inputType="number|numberDecimal" />
-
-        <EditText
-            android:id="@+id/editP"
-            style="@style/MyEditTextStyle"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginTop="3dp"
-            android:hint="(P) Valor Presente..."
-            android:inputType="number|numberDecimal" />
-
-        <LinearLayout
-            style="?android:attr/buttonBarStyle"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <Button
-                android:id="@+id/btnClear"
                 android:layout_marginTop="3dp"
-                android:text="@string/clear"
-                android:background="#eeeeee"
-                android:layout_width="fill_parent"
-                android:layout_weight="1"
-                android:layout_marginEnd="1dp"
-                android:layout_height="wrap_content" />
+                android:hint="(F) Valor Futuro..."
+                android:inputType="number|numberDecimal" />
 
-            <Button
-                android:id="@+id/btnCalculate"
-                android:background="@color/purple_200"
-                android:textColor="@android:color/white"
-                android:layout_marginStart="1dp"
+            <EditText
+                android:id="@+id/editP"
+                style="@style/MyEditTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
                 android:layout_marginTop="3dp"
-                android:text="@string/calculate"
-                android:layout_weight="1"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"/>
+                android:hint="(P) Valor Presente..."
+                android:inputType="number|numberDecimal" />
+
+            <LinearLayout
+                style="?android:attr/buttonBarStyle"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnClear"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_marginTop="3dp"
+                    android:text="@string/clear"
+                    android:layout_width="fill_parent"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="1dp"
+                    android:layout_height="wrap_content" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnCalculate"
+                    app:backgroundTint="?attr/colorPrimary"
+                    android:textColor="?attr/colorOnPrimary"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginTop="3dp"
+                    android:text="@string/calculate"
+                    android:layout_weight="1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <ru.noties.jlatexmath.JLatexMathView
+                android:id="@+id/formula_one"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="16dip"
+                android:background="@color/white"
+                app:jlmv_alignVertical="center"
+                app:jlmv_alignHorizontal="center"
+                app:jlmv_textSize="16sp" />
+
         </LinearLayout>
-
-        <ru.noties.jlatexmath.JLatexMathView
-            android:id="@+id/formula_one"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="16dip"
-            android:background="@color/white"
-            app:jlmv_alignVertical="center"
-            app:jlmv_alignHorizontal="center"
-            app:jlmv_textSize="16sp" />
-
-    </LinearLayout>
-</ScrollView>
+    </ScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,4 +1,4 @@
-package usfx.tarea.ind210;
+package com.factoresinteres.compuesto;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import androidx.appcompat.widget.Toolbar;
 
 import ru.noties.jlatexmath.JLatexMathView;
 
@@ -43,6 +44,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnClear = findViewById(R.id.btnClear);
         mathView = findViewById(R.id.formula_one);
         btnCalculate = findViewById(R.id.btnCalculate);
+        
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        
         btnCalculate.setOnClickListener(this);
         btnClear.setOnClickListener(this);
 

@@ -1,4 +1,4 @@
-package usfx.tarea.ind210;
+package com.factoresinteres.compuesto;
 
 public class Calculate {
     // Retorna F

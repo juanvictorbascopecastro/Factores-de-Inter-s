@@ -1,4 +1,4 @@
-package usfx.tarea.ind210;
+package com.factoresinteres.compuesto;
 
 import android.app.AlertDialog;
 import android.content.ClipData;

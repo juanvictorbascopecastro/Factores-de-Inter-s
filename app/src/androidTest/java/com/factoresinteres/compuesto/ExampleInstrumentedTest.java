@@ -1,4 +1,4 @@
-package usfx.tarea.ind210;
+package com.factoresinteres.compuesto;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("usfx.tarea.ind210", appContext.getPackageName());
+        assertEquals("com.factoresinteres.compuesto", appContext.getPackageName());
     }
 }

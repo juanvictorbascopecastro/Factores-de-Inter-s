@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="usfx.tarea.ind210">
+    package="com.factoresinteres.compuesto">
 
     <application
         android:allowBackup="true"
