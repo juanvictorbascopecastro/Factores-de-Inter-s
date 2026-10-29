@@ -3,15 +3,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     tools:context=".MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fitsSystemWindows="true"
         android:background="?attr/colorPrimary"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
@@ -23,9 +23,11 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
+        android:clipToPadding="false"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
@@ -41,53 +43,54 @@
                 <EditText
                     android:id="@+id/editI"
                     style="@style/MyEditTextStyle"
-                    android:layout_width="fill_parent"
-                    android:layout_height="45dp"
-                    android:layout_marginEnd="2dp"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_marginEnd="4dp"
                     android:layout_weight="1"
-                    android:hint="(i) Interes..."
+                    android:hint="@string/hint_interest"
                     android:inputType="number|numberDecimal" />
 
                 <EditText
                     android:id="@+id/editN"
                     style="@style/MyEditTextStyle"
-                    android:layout_width="fill_parent"
-                    android:layout_height="45dp"
-                    android:layout_marginStart="2dp"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="4dp"
                     android:layout_weight="1"
-                    android:hint="(n) Tiempo, periodo..."
+                    android:hint="@string/hint_periods"
                     android:inputType="number|numberDecimal"/>
             </LinearLayout>
             <EditText
                 android:id="@+id/editA"
                 style="@style/MyEditTextStyle"
-                android:layout_marginTop="3dp"
+                android:layout_marginTop="8dp"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:hint="(A) Flujos Uniforme..."
+                android:layout_height="48dp"
+                android:hint="@string/hint_uniform_series"
                 android:inputType="number|numberDecimal" />
 
             <EditText
                 android:id="@+id/editF"
                 style="@style/MyEditTextStyle"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginTop="3dp"
-                android:hint="(F) Valor Futuro..."
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:hint="@string/hint_future_value"
                 android:inputType="number|numberDecimal" />
 
             <EditText
                 android:id="@+id/editP"
                 style="@style/MyEditTextStyle"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginTop="3dp"
-                android:hint="(P) Valor Presente..."
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:hint="@string/hint_present_value"
                 android:inputType="number|numberDecimal" />
 
             <LinearLayout
                 style="?android:attr/buttonBarStyle"
                 android:orientation="horizontal"
+                android:layout_marginTop="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -96,32 +99,42 @@
                     style="@style/Widget.MaterialComponents.Button.TextButton"
                     android:layout_marginTop="3dp"
                     android:text="@string/clear"
-                    android:layout_width="fill_parent"
+                    android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:layout_marginEnd="1dp"
+                    android:layout_marginEnd="4dp"
                     android:layout_height="wrap_content" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnCalculate"
                     app:backgroundTint="?attr/colorPrimary"
                     android:textColor="?attr/colorOnPrimary"
-                    android:layout_marginStart="1dp"
+                    android:layout_marginStart="4dp"
                     android:layout_marginTop="3dp"
-                    android:text="@string/calculate"
+                    android:text="@string/btn_calculate"
                     android:layout_weight="1"
-                    android:layout_width="fill_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
 
-            <ru.noties.jlatexmath.JLatexMathView
-                android:id="@+id/formula_one"
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="16dip"
-                android:background="@color/white"
-                app:jlmv_alignVertical="center"
-                app:jlmv_alignHorizontal="center"
-                app:jlmv_textSize="16sp" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="2dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/input_border"
+                app:cardBackgroundColor="@color/white">
+
+                <ru.noties.jlatexmath.JLatexMathView
+                    android:id="@+id/formula_one"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dip"
+                    app:jlmv_alignVertical="center"
+                    app:jlmv_alignHorizontal="center"
+                    app:jlmv_textSize="16sp" />
+            </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
     </ScrollView>

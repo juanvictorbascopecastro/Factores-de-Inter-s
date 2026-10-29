@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,7 +45,7 @@ public class dialogFormulario extends AlertDialog {
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(repoLink));
             context.startActivity(intent);
 
-            Toast.makeText(context, "Abriendo repositorio y copiado al portapapeles ✅", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.msg_repo_opened_copied, Toast.LENGTH_SHORT).show();
         });
 
 

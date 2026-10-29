@@ -10,9 +10,9 @@ android {
     defaultConfig {
         applicationId "com.factoresinteres.compuesto"
         minSdkVersion 24
-        targetSdkVersion 35
-        versionCode 3
-        versionName "1.1"
+        targetSdkVersion 36
+        versionCode 4
+        versionName "1.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

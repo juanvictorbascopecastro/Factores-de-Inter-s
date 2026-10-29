@@ -1,5 +1,14 @@
 <resources>
     <string name="app_name">IND210 (Factores de Interés)</string>
-    <string name="calculate">Calcular</string>
+    <string name="btn_calculate">Calcular</string>
     <string name="clear">Limpiar</string>
+    <string name="hint_interest">(i) Interes...</string>
+    <string name="hint_periods">(n) Tiempo, periodo...</string>
+    <string name="hint_uniform_series">(A) Flujos Uniforme...</string>
+    <string name="hint_future_value">(F) Valor Futuro...</string>
+    <string name="hint_present_value">(P) Valor Presente...</string>
+    <string name="error_interest_required">(i) Interes es requerido!</string>
+    <string name="error_period_required">N de (Tiempo o Periodo) es requerido!</string>
+    <string name="error_missing_parameter">Ingrese alguno de los parametros entre A, F o P</string>
+    <string name="msg_repo_opened_copied">Abriendo repositorio y copiado al portapapeles ✅</string>
 </resources>

@@ -7,4 +7,14 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Colores para Inputs (Tema Claro) -->
+    <color name="input_background">#F5F6F8</color>
+    <color name="input_background_disabled">#E9ECEF</color>
+    <color name="input_border">#D0D5DD</color>
+    <color name="input_border_disabled">#E0E0E0</color>
+    <color name="input_border_focused">@color/purple_500</color>
+    <color name="input_text">#1D2939</color>
+    <color name="input_text_hint">#667085</color>
+    <color name="input_text_hint_disabled">#98A2B3</color>
 </resources>

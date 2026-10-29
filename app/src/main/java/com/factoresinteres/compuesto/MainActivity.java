@@ -1,7 +1,14 @@
 package com.factoresinteres.compuesto;
 
+import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+import com.google.android.material.appbar.AppBarLayout;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -13,7 +20,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import androidx.appcompat.widget.Toolbar;
 
 import ru.noties.jlatexmath.JLatexMathView;
 
@@ -34,8 +40,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        EdgeToEdge.enable(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        AppBarLayout appBarLayout = findViewById(R.id.appBarLayout);
+        if (appBarLayout != null) {
+            ViewCompat.setOnApplyWindowInsetsListener(appBarLayout, (v, windowInsets) -> {
+                Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars());
+                v.setPadding(insets.left, insets.top, insets.right, 0);
+                return windowInsets;
+            });
+        }
+
+        View scrollView = findViewById(R.id.scrollView);
+        if (scrollView != null) {
+            ViewCompat.setOnApplyWindowInsetsListener(scrollView, (v, windowInsets) -> {
+                Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars());
+                v.setPadding(insets.left, 0, insets.right, insets.bottom);
+                return windowInsets;
+            });
+        }
+
         editA = findViewById(R.id.editA);
         editF = findViewById(R.id.editF);
         editP = findViewById(R.id.editP);
@@ -55,18 +81,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // evendo cuando cambia el texto
         editA.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {
-                if (!s.toString().trim().equals("")) {
+                if (!s.toString().trim().isEmpty()) {
                     editF.setEnabled(false); // inabilitar F
-                    editF.setTextAppearance(MainActivity.this, R.style.MyEditTextStyleEnabled);
+                    editF.setTextAppearance(R.style.MyEditTextStyleEnabled);
                     editF.getText().clear();
                     editP.getText().clear();
                     editP.setEnabled(false); // Inabilitar P
-                    editP.setTextAppearance(MainActivity.this, R.style.MyEditTextStyleEnabled);
+                    editP.setTextAppearance(R.style.MyEditTextStyleEnabled);
                 } else {
                     editF.setEnabled(true);
-                    editF.setTextAppearance(MainActivity.this, R.style.MyEditTextStyle);
+                    editF.setTextAppearance(R.style.MyEditTextStyle);
                     editP.setEnabled(true);
-                    editP.setTextAppearance(MainActivity.this, R.style.MyEditTextStyle);
+                    editP.setTextAppearance(R.style.MyEditTextStyle);
                 }
             }
 
@@ -80,16 +106,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void afterTextChanged(Editable s) {
                 if (!s.toString().trim().equals("")) {
                     editA.setEnabled(false);
-                    editA.setTextAppearance(MainActivity.this, R.style.MyEditTextStyleEnabled);
+                    editA.setTextAppearance(R.style.MyEditTextStyleEnabled);
                     editA.getText().clear();
                     editP.getText().clear();
                     editP.setEnabled(false);
-                    editP.setTextAppearance(MainActivity.this, R.style.MyEditTextStyleEnabled);
+                    editP.setTextAppearance(R.style.MyEditTextStyleEnabled);
                 } else {
                     editA.setEnabled(true);
-                    editA.setTextAppearance(MainActivity.this, R.style.MyEditTextStyle);
+                    editA.setTextAppearance(R.style.MyEditTextStyle);
                     editP.setEnabled(true);
-                    editP.setTextAppearance(MainActivity.this, R.style.MyEditTextStyle);
+                    editP.setTextAppearance(R.style.MyEditTextStyle);
                 }
             }
 
@@ -101,18 +127,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
         editP.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {
-                if (!s.toString().trim().equals("")) {
+                if (!s.toString().trim().isEmpty()) {
                     editA.setEnabled(false);
-                    editA.setTextAppearance(MainActivity.this, R.style.MyEditTextStyleEnabled);
+                    editA.setTextAppearance(R.style.MyEditTextStyleEnabled);
                     editA.getText().clear();
                     editF.getText().clear();
                     editF.setEnabled(false);
-                    editF.setTextAppearance(MainActivity.this, R.style.MyEditTextStyleEnabled);
+                    editF.setTextAppearance(R.style.MyEditTextStyleEnabled);
                 } else {
                     editA.setEnabled(true);
-                    editA.setTextAppearance(MainActivity.this, R.style.MyEditTextStyle);
+                    editA.setTextAppearance(R.style.MyEditTextStyle);
                     editF.setEnabled(true);
-                    editF.setTextAppearance(MainActivity.this, R.style.MyEditTextStyle);
+                    editF.setTextAppearance(R.style.MyEditTextStyle);
                 }
             }
 
@@ -140,15 +166,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void validators() {
         if (editI.getText().toString().trim().isEmpty()) {
-            Toast.makeText(MainActivity.this, "(i) Interes es requerido!", Toast.LENGTH_LONG).show();
+            Toast.makeText(MainActivity.this, R.string.error_interest_required, Toast.LENGTH_LONG).show();
             return;
         }
         if (editN.getText().toString().trim().isEmpty()) {
-            Toast.makeText(MainActivity.this, "N de (Tiempo o Periodo) es requerido!", Toast.LENGTH_LONG).show();
+            Toast.makeText(MainActivity.this, R.string.error_period_required, Toast.LENGTH_LONG).show();
             return;
         }
         if (editA.getText().toString().trim().isEmpty() && editF.getText().toString().trim().isEmpty() && editP.getText().toString().trim().equals("")) {
-            Toast.makeText(MainActivity.this, "Ingrese alguno de los parametros entre A, F o P", Toast.LENGTH_LONG).show();
+            Toast.makeText(MainActivity.this, R.string.error_missing_parameter, Toast.LENGTH_LONG).show();
             return;
         }
         if (!editA.getText().toString().trim().isEmpty()) {
